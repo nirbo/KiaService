@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KiaService</string>
+
+    <string name="title">הזמנת תור - מרכז שירות פטין עכו</string>
+    <string name="fullName">שם מלא*</string>
+    <string name="email">דואר אלקטרוני</string>
+
+
+</resources>
