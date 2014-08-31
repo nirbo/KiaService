@@ -1,22 +1,19 @@
-package org.nirbo.kiaservice.kia.EditTexts;
+package org.nirbo.kiaservice.kia.KiaServiceViews;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-import org.nirbo.kiaservice.kia.R;
 
 public class KiaEditText extends EditText {
 
     int sdkVersion = Build.VERSION.SDK_INT;
+    boolean isJellyBeanMr1 = isVersionJellyBeanMr1();
     boolean rtlField;
 
     public boolean isRtlField() {
@@ -55,10 +52,10 @@ public class KiaEditText extends EditText {
             KiaEditText mView = (KiaEditText) v;
 
             if (hasFocus) {
-                mDefaultBackgroundTransition.startTransition(150);
+                mDefaultBackgroundTransition.startTransition(100);
                 mView.addTextChangedListener(mTextWatcher);
             } else {
-                mDefaultBackgroundTransition.reverseTransition(150);
+                mDefaultBackgroundTransition.reverseTransition(100);
             }
         }
     };
@@ -74,16 +71,20 @@ public class KiaEditText extends EditText {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             KiaEditText mView = KiaEditText.this;
 
-            if (! mView.isRtlField() && s.length() >= 1) {
-                mView.setGravity(Gravity.LEFT);
-            } else if (! mView.isRtlField() && s.length() == 0) {
-                mView.setGravity(Gravity.RIGHT);
-            }
-
             if (s.length() > 0) {
-                mView.setSelection(s.length());
+                mView.setCursorVisible(true);
+            } else {
+                mView.setCursorVisible(false);
             }
         }
     };
+
+    private boolean isVersionJellyBeanMr1() {
+        if (sdkVersion < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return false;
+        }
+
+        return true;
+    }
 
 }
