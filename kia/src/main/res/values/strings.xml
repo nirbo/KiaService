@@ -8,17 +8,7 @@
     <string name="email">דואר אלקטרוני</string>
     <string name="cellPhone">טלפון נייד*</string>
     <string name="carType">סוג הרכב*</string>
-
-    <string-array name="departmentSpinner">
-        <item>בחר מחלקה</item>
-        <item>מכונאות</item>
-        <item>טיפולים</item>
-        <item>חשמל</item>
-        <item>מיזוג</item>
-        <item>צמיגים</item>
-        <item>פוליש ווקס</item>
-        <item>פחחות וצבע</item>
-    </string-array>
+    <string name="department">בחר מחלקה</string>
 
 
 </resources>

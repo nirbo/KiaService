@@ -6,10 +6,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText;
+import org.nirbo.kiaservice.kia.KiaServiceViews.KiaSpinnerAdapter;
 import org.nirbo.kiaservice.kia.Utilities.Utilities;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
     LinearLayout mRootView;
 
     private List<View> mViewsArrayList = new ArrayList<View>();
+    private List<String> mStringArrayList = new ArrayList<String>();
     private TextView mTitle;
     private KiaEditText mFullNameET;
     private KiaEditText mEmailET;
@@ -63,8 +66,21 @@ public class MainActivity extends ActionBarActivity {
         mViewsArrayList.add(mCarTypeET);
 
         mDepartmentSpin = (Spinner) findViewById(R.id.departmentSpinner);
-        mDepartmentSpin.setSelection(0);
+        mDepartmentSpin.setSelection(R.string.department);
         mViewsArrayList.add(mDepartmentSpin);
+        mStringArrayList.add("מכונאות");
+        mStringArrayList.add("טיפולים");
+        mStringArrayList.add("חשמל");
+        mStringArrayList.add("מיזוג");
+        mStringArrayList.add("צמיגים");
+        mStringArrayList.add("פוליש ווקס");
+        mStringArrayList.add("פחחות וצבע");
+
+        KiaSpinnerAdapter<String> mAdapter = new KiaSpinnerAdapter<String>(
+                                                MainActivity.this,
+                                                R.layout.spinner_element,
+                                                R.id.spinnerElement,
+                                                mStringArrayList);
     }
 
     private void setDynamicViewSizes() {
