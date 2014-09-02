@@ -8,9 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText;
 import org.nirbo.kiaservice.kia.Utilities.Utilities;
@@ -26,8 +24,8 @@ public class MainActivity extends ActionBarActivity {
     private ArrayList<CharSequence> mSelectedDepartments = new ArrayList<CharSequence>();
 
 //        TODO: Populate the department names from a DB values instead of hardcoded stuff.
-    protected CharSequence[] mDepartmentList = { "מכונאות", "טיפולים", "חשמל", "מיזוג" +
-            "צמיגים", "פוליש ווקס", "פחחות וצבע" };
+    protected CharSequence[] mDepartmentList = { "מכונאות", "טיפולים", "חשמל", "מיזוג",
+                                            "צמיגים", "פוליש ווקס", "פחחות וצבע" };
 
     private TextView mTitle;
     private KiaEditText mFullNameET;
@@ -141,10 +139,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void onChangeSelectedDepartments() {
-        StringBuilder mStringBuilder = new StringBuilder();
-        for (CharSequence mDepartment : mSelectedDepartments) {
-            mStringBuilder.append(mDepartment + ", ");
-            mDepartmentET.setText(mStringBuilder.toString());
+        if (mSelectedDepartments.size() > 0) {
+            mDepartmentET.setText(R.string.depSelected);
+        } else {
+            mDepartmentET.setText("");
+            mDepartmentET.setHint(R.string.chooseDep);
+            mDepartmentET.setHintTextColor(getResources().getColor(R.color.HintRed));
         }
     }
 

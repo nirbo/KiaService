@@ -8,7 +8,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.inputmethod.InputMethod;
 import android.widget.EditText;
+import org.nirbo.kiaservice.kia.R;
 
 public class KiaEditText extends EditText {
 
@@ -54,6 +56,7 @@ public class KiaEditText extends EditText {
             if (hasFocus) {
                 mDefaultBackgroundTransition.startTransition(100);
                 mView.addTextChangedListener(mTextWatcher);
+                mView.performClick();
             } else {
                 mDefaultBackgroundTransition.reverseTransition(100);
             }

@@ -9,6 +9,10 @@
     <string name="cellPhone">טלפון נייד*</string>
     <string name="carType">סוג הרכב*</string>
     <string name="chooseDep">בחר מחלקה</string>
+    <string name="depSelected">נבחרו מחלקות</string>
 
+
+    <string name="proceed">המשך</string>
+    <string name="cancel">בטל</string>
 
 </resources>
