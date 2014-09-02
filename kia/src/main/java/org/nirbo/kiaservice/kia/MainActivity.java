@@ -18,6 +18,7 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
+
     LinearLayout mRootView;
 
     private List<View> mViewsArrayList = new ArrayList<View>();
@@ -33,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
     private KiaEditText mCellPhoneET;
     private KiaEditText mCarTypeET;
     private KiaEditText mDepartmentET;
+    private KiaEditText mRequestedService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +76,13 @@ public class MainActivity extends ActionBarActivity {
         mDepartmentET.setRtlField(true);
         mDepartmentET.setOnClickListener(mDepOnClickListener);
         mViewsArrayList.add(mDepartmentET);
+
+        mRequestedService = (KiaEditText) findViewById(R.id.requestedServiceET);
+        mRequestedService.setRtlField(true);
+        mViewsArrayList.add(mRequestedService);
     }
 
-    private void setDynamicViewSizes() {
+    protected void setDynamicViewSizes() {
         Display mDisplay = getWindowManager().getDefaultDisplay();
         Point mDisplaySize = Utilities.getDisplaySize(mDisplay);
         int mDispalyWidth = mDisplaySize.x;
@@ -86,13 +92,16 @@ public class MainActivity extends ActionBarActivity {
 
         for (View view : mViewsArrayList) {
             ViewGroup.LayoutParams mParams = view.getLayoutParams();
+            if (view.getId() == R.id.requestedServiceET) {
+                mNewHeight = (float) (mDispalyHeight / 7.5 );
+            }
             mParams.width = (mNewWidth.intValue());
             mParams.height = (mNewHeight.intValue());
             view.setLayoutParams(mParams);
         }
     }
 
-    private void assignCustomFont() {
+    protected void assignCustomFont() {
         Utilities.setTypefaceOnChildViews(Utilities.getRootView(mRootView),
                 Utilities.getCustomTypeface(getApplicationContext()));
     }
@@ -147,6 +156,7 @@ public class MainActivity extends ActionBarActivity {
             mDepartmentET.setHintTextColor(getResources().getColor(R.color.HintRed));
         }
     }
+
 
 }
 

@@ -8,7 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import org.nirbo.kiaservice.kia.R;
 
@@ -57,6 +57,11 @@ public class KiaEditText extends EditText {
                 mDefaultBackgroundTransition.startTransition(100);
                 mView.addTextChangedListener(mTextWatcher);
                 mView.performClick();
+
+                if (mView.getId() == R.id.departmentET) {
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mView.getWindowToken(), 0);
+                }
             } else {
                 mDefaultBackgroundTransition.reverseTransition(100);
             }
