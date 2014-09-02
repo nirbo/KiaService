@@ -110,17 +110,22 @@
                     android:layout_marginTop="20dp">
             </org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText>
 
-            <org.nirbo.kiaservice.kia.KiaServiceViews.KiaSpinner
-                android:id="@+id/departmentSpinner"
+            <org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText
+                android:id="@+id/departmentET"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/text_small"
-                android:entries="@array/departmentSpinner"
-                android:background="@drawable/spinner"
-                android:spinnerMode="dropdown"
+                android:hint="@string/chooseDep"
+                android:textColorHint="@color/HintRed"
+                android:background="@drawable/edittext_transition"
                 android:layout_gravity="center"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:editable="false"
+                android:cursorVisible="false"
                 android:layout_marginTop="20dp">
-            </org.nirbo.kiaservice.kia.KiaServiceViews.KiaSpinner>
+            </org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText>
 
         </LinearLayout>
     </ScrollView>

@@ -1,5 +1,7 @@
 package org.nirbo.kiaservice.kia;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -11,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText;
-import org.nirbo.kiaservice.kia.KiaServiceViews.KiaSpinnerAdapter;
 import org.nirbo.kiaservice.kia.Utilities.Utilities;
 
 import java.util.ArrayList;
@@ -22,13 +23,18 @@ public class MainActivity extends ActionBarActivity {
     LinearLayout mRootView;
 
     private List<View> mViewsArrayList = new ArrayList<View>();
-    private List<String> mStringArrayList = new ArrayList<String>();
+    private ArrayList<CharSequence> mSelectedDepartments = new ArrayList<CharSequence>();
+
+//        TODO: Populate the department names from a DB values instead of hardcoded stuff.
+    protected CharSequence[] mDepartmentList = { "מכונאות", "טיפולים", "חשמל", "מיזוג" +
+            "צמיגים", "פוליש ווקס", "פחחות וצבע" };
+
     private TextView mTitle;
     private KiaEditText mFullNameET;
     private KiaEditText mEmailET;
     private KiaEditText mCellPhoneET;
     private KiaEditText mCarTypeET;
-    private Spinner mDepartmentSpin;
+    private KiaEditText mDepartmentET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
         initViews();
         setDynamicViewSizes();
         assignCustomFont();
+
 
     }
 
@@ -65,22 +72,10 @@ public class MainActivity extends ActionBarActivity {
         mCarTypeET.setRtlField(true);
         mViewsArrayList.add(mCarTypeET);
 
-        mDepartmentSpin = (Spinner) findViewById(R.id.departmentSpinner);
-        mDepartmentSpin.setSelection(R.string.department);
-        mViewsArrayList.add(mDepartmentSpin);
-        mStringArrayList.add("מכונאות");
-        mStringArrayList.add("טיפולים");
-        mStringArrayList.add("חשמל");
-        mStringArrayList.add("מיזוג");
-        mStringArrayList.add("צמיגים");
-        mStringArrayList.add("פוליש ווקס");
-        mStringArrayList.add("פחחות וצבע");
-
-        KiaSpinnerAdapter<String> mAdapter = new KiaSpinnerAdapter<String>(
-                                                MainActivity.this,
-                                                R.layout.spinner_element,
-                                                R.id.spinnerElement,
-                                                mStringArrayList);
+        mDepartmentET = (KiaEditText) findViewById(R.id.departmentET);
+        mDepartmentET.setRtlField(true);
+        mDepartmentET.setOnClickListener(mDepOnClickListener);
+        mViewsArrayList.add(mDepartmentET);
     }
 
     private void setDynamicViewSizes() {
@@ -104,6 +99,62 @@ public class MainActivity extends ActionBarActivity {
                 Utilities.getCustomTypeface(getApplicationContext()));
     }
 
+    private View.OnClickListener mDepOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.departmentET:
+                    showDepartmentsDialog();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
+    private void showDepartmentsDialog() {
+        boolean[] mCheckedDepartments = new boolean[mDepartmentList.length];
+        int mDepCount = mDepartmentList.length;
+
+        for (int i = 0; i < mDepCount; i++) {
+            mCheckedDepartments[i] = mSelectedDepartments.contains(mDepartmentList[i]);
+        }
+
+        DialogInterface.OnMultiChoiceClickListener mMultiChoiceDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int selection, boolean isChecked) {
+                if (isChecked) {
+                    mSelectedDepartments.add(mDepartmentList[selection]);
+                } else {
+                    mSelectedDepartments.remove(mDepartmentList[selection]);
+                }
+
+                onChangeSelectedDepartments();
+            }
+        };
+
+        AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
+        mDialogBuilder.setTitle(R.string.chooseDep);
+        mDialogBuilder.setMultiChoiceItems(mDepartmentList, mCheckedDepartments, mMultiChoiceDialogListener);
+        AlertDialog mDialog = mDialogBuilder.create();
+        mDialog.show();
+    }
+
+    private void onChangeSelectedDepartments() {
+        StringBuilder mStringBuilder = new StringBuilder();
+        for (CharSequence mDepartment : mSelectedDepartments) {
+            mStringBuilder.append(mDepartment + ", ");
+            mDepartmentET.setText(mStringBuilder.toString());
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+

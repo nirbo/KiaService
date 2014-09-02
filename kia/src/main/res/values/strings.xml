@@ -8,7 +8,7 @@
     <string name="email">דואר אלקטרוני</string>
     <string name="cellPhone">טלפון נייד*</string>
     <string name="carType">סוג הרכב*</string>
-    <string name="department">בחר מחלקה</string>
+    <string name="chooseDep">בחר מחלקה</string>
 
 
 </resources>
