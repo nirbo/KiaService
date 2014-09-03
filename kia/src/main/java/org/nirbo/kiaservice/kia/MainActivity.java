@@ -34,7 +34,8 @@ public class MainActivity extends ActionBarActivity {
     private KiaEditText mCellPhoneET;
     private KiaEditText mCarTypeET;
     private KiaEditText mDepartmentET;
-    private KiaEditText mRequestedService;
+    private KiaEditText mRequestedServiceET;
+    private KiaEditText mDatePickerET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +78,13 @@ public class MainActivity extends ActionBarActivity {
         mDepartmentET.setOnClickListener(mDepOnClickListener);
         mViewsArrayList.add(mDepartmentET);
 
-        mRequestedService = (KiaEditText) findViewById(R.id.requestedServiceET);
-        mRequestedService.setRtlField(true);
-        mViewsArrayList.add(mRequestedService);
+        mRequestedServiceET = (KiaEditText) findViewById(R.id.requestedServiceET);
+        mRequestedServiceET.setRtlField(true);
+        mViewsArrayList.add(mRequestedServiceET);
+
+        mDatePickerET = (KiaEditText) findViewById(R.id.datePickET);
+        mDatePickerET.setRtlField(false);
+        mViewsArrayList.add(mDatePickerET);
     }
 
     protected void setDynamicViewSizes() {
@@ -87,14 +92,17 @@ public class MainActivity extends ActionBarActivity {
         Point mDisplaySize = Utilities.getDisplaySize(mDisplay);
         int mDispalyWidth = mDisplaySize.x;
         int mDispalyHeight = mDisplaySize.y;
+        Float mNewHeight;
         Float mNewWidth = (float) (mDispalyWidth / 1.5);
-        Float mNewHeight = (float) (mDispalyHeight / 18);
 
         for (View view : mViewsArrayList) {
             ViewGroup.LayoutParams mParams = view.getLayoutParams();
             if (view.getId() == R.id.requestedServiceET) {
                 mNewHeight = (float) (mDispalyHeight / 7.5 );
+            } else {
+                mNewHeight = (float) (mDispalyHeight / 18);
             }
+
             mParams.width = (mNewWidth.intValue());
             mParams.height = (mNewHeight.intValue());
             view.setLayoutParams(mParams);

@@ -8,9 +8,10 @@
     <string name="email">דואר אלקטרוני</string>
     <string name="cellPhone">טלפון נייד*</string>
     <string name="carType">סוג הרכב*</string>
-    <string name="chooseDep">בחר מחלקות</string>
+    <string name="chooseDep">מחלקות מבוקשות</string>
     <string name="depSelected">נבחרו מחלקות</string>
     <string name="requestedService">הטיפול המבוקש*</string>
+    <string name="datePick">תאריך מבוקש</string>
 
 
 

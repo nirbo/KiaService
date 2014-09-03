@@ -146,6 +146,21 @@
                 android:layout_marginTop="20dp">
             </org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText>
 
+            <org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText
+                android:id="@+id/datePickET"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/text_medium1"
+                android:hint="@string/datePick"
+                android:textColorHint="@color/HintRed"
+                android:background="@drawable/edittext_transition"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:editable="false"
+                android:cursorVisible="false"
+                android:layout_marginTop="20dp">
+            </org.nirbo.kiaservice.kia.KiaServiceViews.KiaEditText>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
