@@ -11,11 +11,18 @@
     <string name="chooseDep">מחלקות מבוקשות</string>
     <string name="depSelected">נבחרו מחלקות</string>
     <string name="requestedService">הטיפול המבוקש*</string>
-    <string name="datePick">תאריך מבוקש</string>
+    <string name="datePick">תאריך מבוקש*</string>
+    <string name="timePick">שעה מבוקשת*</string>
+    <string name="carTransport">האם נדרש שינוע לרכב?</string>
+    <string name="carTransportTrue">נדרש שינוע לרכב</string>
+    <string name="carTransportFalse">לא נדרש שינוע לרכב</string>
+    <string name="comments">הערות</string>
 
-
+    <string name="carTransportPositiveButton">כן</string>
+    <string name="carTransportNegativeButton">לא</string>
 
     <string name="proceed">המשך</string>
     <string name="cancel">בטל</string>
+    <string name="submitForm">שלח טופס</string>
 
 </resources>
