@@ -10,8 +10,6 @@
             android:color="@color/ICSBlue">
         </stroke>
 
-        <corners
-            android:radius="7dp" >
-        </corners>
+        <corners android:radius="7dp"/>
 
 </shape>

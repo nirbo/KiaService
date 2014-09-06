@@ -6,6 +6,7 @@
     <color name="ThemeDarkGray">#373737</color>
     <color name="ThemeDarkerGray">#696969</color>
     <color name="ThemeBackgroundGray">#DFDFDF</color>
+    <color name="ThemeBackgroundGrayAlpha">#CCDFDFDF</color>
     <color name="ThemeDarkRed">#E21D25</color>
     <color name="ThemeRed">#E21F25</color>
     <color name="HintRed">#59E21F25</color>
