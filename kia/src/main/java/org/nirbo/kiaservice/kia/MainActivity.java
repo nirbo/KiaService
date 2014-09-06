@@ -81,13 +81,6 @@ public class MainActivity extends SherlockFragmentActivity
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
 
