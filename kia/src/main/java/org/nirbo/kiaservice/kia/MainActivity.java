@@ -83,6 +83,11 @@ public class MainActivity extends SherlockFragmentActivity
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        showQuitConfirmationDialog();
+    }
+
 
     /* ************** */
     /* Global Methods */
@@ -192,6 +197,21 @@ public class MainActivity extends SherlockFragmentActivity
         mRootView.setOnTouchListener(mHideKeyboardListener);
         mMainScrollView = (ScrollView) findViewById(R.id.mainScrollView);
         mMainScrollView.setOnTouchListener(mHideKeyboardListener);
+    }
+
+    private void showQuitConfirmationDialog() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.quitApp)
+                .setMessage(R.string.quitConfirm)
+                .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.this.finish();
+                    }
+                })
+
+                .setNegativeButton(R.string.negative, null)
+                .show();
     }
 
 
@@ -313,12 +333,12 @@ public class MainActivity extends SherlockFragmentActivity
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        mCarTransportET.setText(R.string.carTransportTrue);
+                        mCarTransportET.setText(R.string.positive);
                         carTransportRequired = true;
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
-                        mCarTransportET.setText(R.string.carTransportFalse);
+                        mCarTransportET.setText(R.string.negative);
                         carTransportRequired = false;
                         break;
                 }
@@ -327,8 +347,8 @@ public class MainActivity extends SherlockFragmentActivity
 
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
         mDialogBuilder.setMessage(R.string.carTransport)
-                .setPositiveButton(R.string.carTransportPositiveButton, mDialogListener)
-                .setNegativeButton(R.string.carTransportNegativeButton, mDialogListener)
+                .setPositiveButton(R.string.positive, mDialogListener)
+                .setNegativeButton(R.string.negative, mDialogListener)
                 .show();
     }
 

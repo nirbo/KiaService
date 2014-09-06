@@ -18,8 +18,10 @@
     <string name="carTransportFalse">לא נדרש שינוע לרכב</string>
     <string name="comments">הערות</string>
 
-    <string name="carTransportPositiveButton">כן</string>
-    <string name="carTransportNegativeButton">לא</string>
+    <string name="positive">כן</string>
+    <string name="negative">לא</string>
+    <string name="quitApp">האפליקציה נסגרת ...</string>
+    <string name="quitConfirm">האם ברצונכם לצאת?</string>
 
     <string name="proceed">המשך</string>
     <string name="cancel">בטל</string>
