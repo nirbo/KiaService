@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.text.format.DateFormat;
 import android.view.*;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout;
@@ -67,6 +64,28 @@ public class MainActivity extends SherlockFragmentActivity
         assignCustomFont();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle saveState) {
+        super.onSaveInstanceState(saveState);
+
+        saveState.putCharSequenceArrayList("departments", mSelectedDepartments);
+        saveState.putBoolean("carTransport", carTransportRequired);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        mSelectedDepartments = savedInstanceState.getCharSequenceArrayList("departments");
+        carTransportRequired = savedInstanceState.getBoolean("carTransport");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+
+    }
 
     @Override
     public void onResume() {
@@ -87,6 +106,7 @@ public class MainActivity extends SherlockFragmentActivity
     public void onBackPressed() {
         showQuitConfirmationDialog();
     }
+
 
 
     /* ************** */
@@ -333,12 +353,12 @@ public class MainActivity extends SherlockFragmentActivity
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        mCarTransportET.setText(R.string.positive);
+                        mCarTransportET.setText(R.string.carTransportTrue);
                         carTransportRequired = true;
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
-                        mCarTransportET.setText(R.string.negative);
+                        mCarTransportET.setText(R.string.carTransportFalse);
                         carTransportRequired = false;
                         break;
                 }
