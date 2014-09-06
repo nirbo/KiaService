@@ -3,7 +3,6 @@ package org.nirbo.kiaservice.kia.KiaServiceViews;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.TransitionDrawable;
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -14,8 +13,6 @@ import org.nirbo.kiaservice.kia.Utilities.Utilities;
 
 public class KiaEditText extends EditText  {
 
-    int sdkVersion = Build.VERSION.SDK_INT;
-    boolean isJellyBeanMr1 = isVersionJellyBeanMr1();
     boolean rtlField;
 
     public boolean isRtlField() {
@@ -86,11 +83,4 @@ public class KiaEditText extends EditText  {
         }
     };
 
-    private boolean isVersionJellyBeanMr1() {
-        if (sdkVersion < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return false;
-        }
-
-        return true;
-    }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,5 +77,9 @@ public class Utilities {
     public static void hideKeyboard(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static int getDeviceSdkVersion() {
+        return Build.VERSION.SDK_INT;
     }
 }
