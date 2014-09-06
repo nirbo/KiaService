@@ -22,9 +22,13 @@
     <string name="negative">לא</string>
     <string name="quitApp">האפליקציה נסגרת ...</string>
     <string name="quitConfirm">האם ברצונכם לצאת?</string>
+    <string name="invalidMandatory">שדות חובה לא מולאו</string>
+    <string name="invalidMessage">אנא מלאו את כל שדות החובה המסומנים</string>
+    <string name="returnToForm">חזור לטופס</string>
 
     <string name="proceed">המשך</string>
     <string name="cancel">בטל</string>
     <string name="submitForm">שלח טופס</string>
+    <string name="mandatoryField">שדה חובה</string>
 
 </resources>

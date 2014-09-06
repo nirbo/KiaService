@@ -2,6 +2,7 @@ package org.nirbo.kiaservice.kia.KiaServiceViews;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import org.nirbo.kiaservice.kia.Utilities.Utilities;
 public class KiaEditText extends EditText  {
 
     boolean rtlField;
+    boolean mandatory;
 
     public boolean isRtlField() {
         return rtlField;
@@ -21,6 +23,14 @@ public class KiaEditText extends EditText  {
 
     public void setRtlField(boolean rtlField) {
         this.rtlField = rtlField;
+    }
+
+    public boolean isMandatory() {
+        return mandatory;
+    }
+
+    public void setMandatory(boolean mandatory) {
+        this.mandatory = mandatory;
     }
 
     public KiaEditText(Context context) {

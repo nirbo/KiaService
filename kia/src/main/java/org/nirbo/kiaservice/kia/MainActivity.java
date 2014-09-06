@@ -3,7 +3,11 @@ package org.nirbo.kiaservice.kia;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.HandlerThread;
 import android.support.v4.app.FragmentManager;
 import android.text.format.DateFormat;
 import android.view.*;
@@ -111,18 +115,22 @@ public class MainActivity extends SherlockFragmentActivity
 
         mFullNameET = (KiaEditText) findViewById(R.id.fullNameET);
         mFullNameET.setRtlField(true);
+        mFullNameET.setMandatory(true);
         mViewsArrayList.add(mFullNameET);
 
         mEmailET = (KiaEditText) findViewById(R.id.emailET);
         mEmailET.setRtlField(false);
+        mEmailET.setMandatory(false);
         mViewsArrayList.add(mEmailET);
 
         mCellPhoneET = (KiaEditText) findViewById(R.id.cellPhoneET);
         mCellPhoneET.setRtlField(false);
+        mCellPhoneET.setMandatory(true);
         mViewsArrayList.add(mCellPhoneET);
 
         mCarTypeET = (KiaEditText) findViewById(R.id.carTypeET);
         mCarTypeET.setRtlField(true);
+        mCarTypeET.setMandatory(true);
         mViewsArrayList.add(mCarTypeET);
 
         mDepartmentET = (KiaEditText) findViewById(R.id.departmentET);
@@ -132,28 +140,34 @@ public class MainActivity extends SherlockFragmentActivity
 
         mRequestedServiceET = (KiaEditText) findViewById(R.id.requestedServiceET);
         mRequestedServiceET.setRtlField(true);
+        mRequestedServiceET.setMandatory(true);
         mViewsArrayList.add(mRequestedServiceET);
 
         mDatePickerET = (KiaEditText) findViewById(R.id.datePickET);
         mDatePickerET.setRtlField(false);
+        mDatePickerET.setMandatory(true);
         mDatePickerET.setOnClickListener(mDatePickerOnClickListener);
         mViewsArrayList.add(mDatePickerET);
 
         mTimePickerET = (KiaEditText) findViewById(R.id.timePickET);
         mTimePickerET.setRtlField(false);
+        mTimePickerET.setMandatory(true);
         mTimePickerET.setOnClickListener(mTimePickerOnClickListener);
         mViewsArrayList.add(mTimePickerET);
 
         mCarTransportET = (KiaEditText) findViewById(R.id.carTransportET);
         mCarTransportET.setRtlField(true);
+        mCarTransportET.setMandatory(false);
         mCarTransportET.setOnClickListener(mCarTransportOnClickListener);
         mViewsArrayList.add(mCarTransportET);
 
         mCommentsET = (KiaEditText) findViewById(R.id.commentsET);
         mCommentsET.setRtlField(true);
+        mCommentsET.setMandatory(false);
         mViewsArrayList.add(mCommentsET);
 
         mSubmitButton = (Button) findViewById(R.id.submitButton);
+        mSubmitButton.setOnClickListener(mSubmitButtonOnClickListener);
         mViewsArrayList.add(mSubmitButton);
     }
 
@@ -225,6 +239,47 @@ public class MainActivity extends SherlockFragmentActivity
 
                 .setNegativeButton(R.string.negative, null)
                 .show();
+    }
+
+    private boolean verifyMandatoryFields() {
+        boolean isValid = true;
+
+        for (View view : mViewsArrayList) {
+            if (view instanceof KiaEditText && ((KiaEditText) view).isMandatory()) {
+                String mViewInput = ((KiaEditText) view).getText().toString();
+
+                if ("".matches(mViewInput)) {
+                    isValid = false;
+                    ((KiaEditText) view).setError(getResources().getString(R.string.mandatoryField));
+                }
+            }
+        }
+
+        return isValid;
+    }
+
+    private void showInvalidFieldsDialog() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.invalidMandatory)
+                .setMessage(R.string.invalidMessage)
+                .setPositiveButton(R.string.returnToForm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void normalizeViewBackground(View view) {
+        int mDeviceSdk = Utilities.getDeviceSdkVersion();
+        Drawable mBackground = getResources().getDrawable(R.drawable.edittext_transition);
+
+        if (mDeviceSdk >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(mBackground);
+        } else {
+            view.setBackgroundDrawable(mBackground);
+        }
     }
 
 
@@ -365,6 +420,18 @@ public class MainActivity extends SherlockFragmentActivity
                 .show();
     }
 
+    private View.OnClickListener mSubmitButtonOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            boolean mFieldsVerified = verifyMandatoryFields();
+
+            if (! mFieldsVerified) {
+                showInvalidFieldsDialog();
+            } else {
+                // TODO: Insert values into DB
+            }
+        }
+    };
 
 
 
