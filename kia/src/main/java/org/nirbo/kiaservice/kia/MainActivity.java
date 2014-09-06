@@ -243,6 +243,8 @@ public class MainActivity extends SherlockFragmentActivity
 
     private boolean verifyMandatoryFields() {
         boolean isValid = true;
+        Drawable mDrawable = getResources().getDrawable(android.R.drawable.ic_delete);
+        mDrawable.setBounds(0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight());
 
         for (View view : mViewsArrayList) {
             if (view instanceof KiaEditText && ((KiaEditText) view).isMandatory()) {
@@ -250,7 +252,9 @@ public class MainActivity extends SherlockFragmentActivity
 
                 if ("".matches(mViewInput)) {
                     isValid = false;
-                    ((KiaEditText) view).setError(getResources().getString(R.string.mandatoryField));
+                    ((KiaEditText) view).setCompoundDrawables(null, null, mDrawable, null);
+                } else {
+                    ((KiaEditText) view).setCompoundDrawables(null, null, null, null);
                 }
             }
         }
